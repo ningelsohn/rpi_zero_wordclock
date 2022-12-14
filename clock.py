@@ -1,5 +1,5 @@
-from rpi_ws281x import *
 import time
+import config
 
 LED_ROWS = 10
 LED_COLUMNS = 11
@@ -20,7 +20,7 @@ class WordClock:
 
     def __init__(self):
         
-        self.strip = PixelStrip(LED_ROWS*LED_COLUMNS, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
+        # self.strip = PixelStrip(LED_ROWS*LED_COLUMNS, LED_PIN, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL)
         self.led_layout = self.init_led_layout()
         self.char_layout = 'eskistlfünfzehnzwanzigdreivierteltgnachvorjmhalbqZWÖLFpZWEINSIEBENkDREIrhFÜNFELFNEUNVIERwACHTZEHNrsbSECHSfmuhr'
         self.time_base = ['es', 'ist']
@@ -87,7 +87,7 @@ class WordClock:
         """
 
         #: Method expects a list of the length of the led count
-        assert len(colors) == self.rows * self.columns
+        assert len(colors) == LED_ROWS * LED_COLUMNS
 
         #: Reset display before updating with new colors
         self.reset()
