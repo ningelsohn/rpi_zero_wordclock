@@ -21,8 +21,21 @@ LED_INVERT = False
 LED_BRIGHTNESS = 255
 LED_CHANNEL = 0
 
-# create map for zig zag wiring of leds to standard 2d matrix ordering
 def init_led_layout():
+
+    """ Builds matrix to map from matrix-order to zig zag 
+
+            Due to how the LED-Strips are wired, a conversion of indices is needed.
+
+            Conventional matrices:               LED-Strip-wiring:
+                [[ 0,  1,  2,  3],               [[15, 14, 13, 12]
+                 [ 4,  5,  6,  7],                [ 8,  9, 10, 11]         
+                 [ 8,  9, 10, 11],                [ 7,  6,  5,  4]
+                 [12, 13, 14, 15]]                [ 0,  1,  2,  3]]
+
+            Note that the actual implementation is using a one dimensional list for the conversion matrix as well as the color matrices
+    """
+
     #: Create all rows in ascending order (current state similar to above shown conventional matrix order)
     num = [[x for x in range(LED_COLUMNS*y, LED_COLUMNS*y + LED_COLUMNS)] for y in range(LED_ROWS)]
 
@@ -33,3 +46,4 @@ def init_led_layout():
     return list(reversed([x for y in rev for x in y]))
 
 LED_LAYOUT = init_led_layout()
+LED_DEFAULT_COLOR = 0x0
