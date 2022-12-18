@@ -120,6 +120,7 @@ class LEDController:
         #: Use GPIO pixelstrip when in production
         if config.mode is config.Mode.PRODUCTION:
             self.strip = PixelStrip(config.LED_ROWS*config.LED_COLUMNS, config.LED_PIN, config.LED_FREQ_HZ, config.LED_DMA, config.LED_INVERT, config.LED_BRIGHTNESS, config.LED_CHANNEL)
+            self.strip.begin()
         #: Otherwise use mock
         else:
             self.strip = PixelStripMock()
@@ -212,10 +213,5 @@ if __name__ == '__main__':
 
     lc = LEDController()
 
-    # lc.update_pixel_color(0, 0x33)
-
-    indices = {0, 1, 3, 4, 5, 77, 78, 79, 26, 27, 28, 29, 30, 31, 32, 35, 36, 37, 38}
-    l = [0xaabbcc if x in indices else 0 for x in range(config.LED_COUNT)]
-    print(l)
-    lc.update_colors(l)
-
+    lc.set_pixel_color(2, 0xFF0000)
+    lc.show()
