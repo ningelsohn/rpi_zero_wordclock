@@ -83,4 +83,4 @@ class WordClock:
                 time.sleep(1)
 
 clock = WordClock()
-clock.test()
+clock.start()
